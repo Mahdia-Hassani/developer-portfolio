@@ -1,0 +1,109 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Background */
+  --bg: #120b1c;
+  --bg2: #1b1228;
+  --bg3: #241735;
+
+  /* Primary */
+  --primary: #9d6cff;
+  --primary-light: rgba(157, 108, 255, 0.15);
+  --primary-border: rgba(157, 108, 255, 0.28);
+
+  /* Text */
+  --text: #f6f4fb;
+  --muted: #b8b0c7;
+  --faint: #7f7890;
+
+  /* Border */
+  --border: rgba(255, 255, 255, 0.06);
+  --mono: "Courier New", monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  line-height: 1.6;
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 80px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+/* ---------- LIGHT MODE ---------- */
+
+body.light {
+  --bg: #f8f7fc;
+  --bg2: #ffffff;
+  --bg3: #ffffff;
+
+  --primary: #7a49c6;
+  --primary-light: rgba(122, 73, 198, 0.1);
+  --primary-border: rgba(122, 73, 198, 0.18);
+
+  --text: #1b1625;
+  --muted: #635c73;
+  --faint: #938ca0;
+
+  --border: rgba(0, 0, 0, 0.08);
+}
+
+body.light .navbar {
+  background: rgba(24, 18, 36, 0.7);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.light .navbar {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.light .profile-card,
+body.light .card,
+body.light .terminal {
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+body.light .btn-primary,
+body.light .nav-cta {
+  color: white;
+}
