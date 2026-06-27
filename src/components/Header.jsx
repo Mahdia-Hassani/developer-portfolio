@@ -9,7 +9,7 @@ function Header({ welcome = "Hi, I'm" }) {
           {welcome} <span>Mahdia Hassani</span>
         </h1>
 
-        <p className="header-loc"> Kabul, Afghanistan</p>
+        <p className="header-loc"> 📍 Kabul, Afghanistan</p>
 
         <p className="header-quote">
           I build clean, responsive web interfaces using HTML, CSS, JAVASCRIPT,
