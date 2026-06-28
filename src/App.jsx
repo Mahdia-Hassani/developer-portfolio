@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
@@ -13,24 +13,25 @@ import FeedbackWall from "./components/FeedbackWall";
 import "./index.css";
 import "./App.css";
 
-const quotes = [
-  "Build things that matter.",
-  "Code is craft.",
-  "One commit at a time.",
-  "Make it work, then make it beautiful.",
-];
-
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
-  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+
+  useEffect(() => {
+    document.body.className = "";
+    document.body.classList.add(theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  // =========================
+  // TOGGLE THEME (ONLY DARK / LIGHT)
+  // =========================
   const toggleTheme = () => {
-    setDarkMode((prev) => !prev);
-    document.body.classList.toggle("light");
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   return (
-    <div className={darkMode ? "dark-theme" : "light-theme"}>
-      <Navbar onToggleTheme={toggleTheme} darkMode={darkMode} />
+    <div className={theme}>
+      <Navbar onToggleTheme={toggleTheme} darkMode={theme === "dark"} />
 
       <Header welcome="Hi, I'm" />
 
@@ -49,13 +50,9 @@ function App() {
       />
 
       <About />
-
       <Skills />
-
       <Projects />
-
       <FeedbackWall />
-
       <Contact />
 
       <Footer

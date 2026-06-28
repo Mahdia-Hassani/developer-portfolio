@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 
 export default function Contact() {
   // =========================
-  // STATE (with localStorage init)
+  // STATES
   // =========================
+  const [loading, setLoading] = useState(false);
+
   const [form, setForm] = useState(() => {
     const saved = localStorage.getItem("contact-form");
     return saved ? JSON.parse(saved) : { name: "", email: "", message: "" };
@@ -12,9 +14,10 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
   const [typingError, setTypingError] = useState("");
+  const [showDraftToast, setShowDraftToast] = useState(false);
 
   // =========================
-  // AUTO SAVE (localStorage)
+  // AUTO SAVE
   // =========================
   useEffect(() => {
     if (form.name || form.email || form.message) {
@@ -56,12 +59,18 @@ export default function Contact() {
   // HANDLE CHANGE
   // =========================
   const handleChange = (e) => {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
 
-    setErrors({}); // clear errors while typing
+    const updated = {
+      ...form,
+      [name]: value,
+    };
+
+    setForm(updated);
+    setErrors({});
+
+    setShowDraftToast(true);
+    setTimeout(() => setShowDraftToast(false), 2000);
   };
 
   // =========================
@@ -70,9 +79,9 @@ export default function Contact() {
   const validate = () => {
     let newErrors = {};
 
-    if (!form.name.trim()) newErrors.name = "Name is required";
-
     const emailRegex = /\S+@\S+\.\S+/;
+
+    if (!form.name.trim()) newErrors.name = "Name is required";
 
     if (!form.email.trim()) {
       newErrors.email = "Email is required";
@@ -80,7 +89,9 @@ export default function Contact() {
       newErrors.email = "Email is not valid";
     }
 
-    if (!form.message.trim()) newErrors.message = "Message is required";
+    if (!form.message.trim()) {
+      newErrors.message = "Message is required";
+    }
 
     return newErrors;
   };
@@ -95,16 +106,16 @@ export default function Contact() {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      setSuccess(true);
+      setLoading(true);
 
-      // clear storage + form
-      localStorage.removeItem("contact-form");
+      setTimeout(() => {
+        setLoading(false);
+        setSuccess(true);
 
-      setForm({
-        name: "",
-        email: "",
-        message: "",
-      });
+        localStorage.removeItem("contact-form");
+
+        setForm({ name: "", email: "", message: "" });
+      }, 800);
     }
   };
 
@@ -112,12 +123,19 @@ export default function Contact() {
   // UI
   // =========================
   return (
-    <section className="contact">
+    <section id="contact" className="contact">
       <h2>Contact Me</h2>
 
-      {/* draft hint */}
-      {(form.name || form.email || form.message) && (
-        <p className="draft-hint">You have unsent message data saved 💾</p>
+      {/* DRAFT TOAST */}
+      {showDraftToast && (
+        <div className="draft-toast">
+          <span className="dot"></span>
+
+          <div className="draft-texts">
+            <p className="draft-title">Draft saved</p>
+            <p className="draft-desc">Your message is saved locally</p>
+          </div>
+        </div>
       )}
 
       <form onSubmit={handleSubmit}>
@@ -128,7 +146,7 @@ export default function Contact() {
           value={form.name}
           onChange={handleChange}
         />
-        {errors.name && <p className="error">{errors.name}</p>}
+        {errors.name && <div className="error-box">⚠ {errors.name}</div>}
 
         {/* EMAIL */}
         <input
@@ -137,8 +155,8 @@ export default function Contact() {
           value={form.email}
           onChange={handleChange}
         />
-        {errors.email && <p className="error">{errors.email}</p>}
-        {typingError && <p className="error">{typingError}</p>}
+        {errors.email && <div className="error-box">⚠ {errors.email}</div>}
+        {typingError && <div className="error-box">⚠ {typingError}</div>}
 
         {/* MESSAGE */}
         <textarea
@@ -147,12 +165,14 @@ export default function Contact() {
           value={form.message}
           onChange={handleChange}
         />
-        {errors.message && <p className="error">{errors.message}</p>}
+        {errors.message && <div className="error-box">⚠ {errors.message}</div>}
 
-        <button type="submit">Send Message</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Sending..." : "Send Message"}
+        </button>
       </form>
 
-      {/* SUCCESS TOAST */}
+      {/* SUCCESS */}
       {success && <div className="success">Message sent successfully 🎉</div>}
     </section>
   );

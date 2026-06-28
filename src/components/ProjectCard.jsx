@@ -14,6 +14,9 @@ import { SiMysql } from "react-icons/si";
 function ProjectCard({ project }) {
   if (!project) return null;
 
+  // =========================
+  // ICON MAP
+  // =========================
   const techIcons = {
     HTML: <FaHtml5 color="#e34c26" />,
     CSS: <FaCss3Alt color="#2965f1" />,
@@ -27,35 +30,47 @@ function ProjectCard({ project }) {
   return (
     <div className="project-card">
       {/* IMAGE */}
-      <img src={project.image} alt={project.name} className="project-img" />
+      <div className="project-image-wrapper">
+        <img src={project.image} alt={project.name} className="project-img" />
 
-      {/* FEATURED */}
-      {project.featured && <span className="featured-badge">Featured</span>}
+        {/* FEATURED BADGE */}
+        {project.featured && (
+          <span className="featured-badge">Featured ⭐</span>
+        )}
+      </div>
 
       {/* TITLE */}
       <h3>{project.name}</h3>
 
       {/* DESCRIPTION */}
-      <p>{project.description}</p>
+      <p className="project-desc">{project.description}</p>
 
       {/* TECH STACK */}
       <div className="tech-stack">
-        {project.tech.map((tech) => (
+        {project.tech?.map((tech) => (
           <span key={tech} className="tech-badge">
             {techIcons[tech] || tech}
           </span>
         ))}
       </div>
 
-      {/* LINKS */}
+      {/* LINKS (Conditional Rendering improved) */}
       <div className="project-links">
-        <a href={project.github} target="_blank" rel="noreferrer">
-          <FaGithub /> GitHub
-        </a>
+        {project.github ? (
+          <a href={project.github} target="_blank" rel="noreferrer">
+            <FaGithub /> Code
+          </a>
+        ) : (
+          <span className="disabled-link">No Code</span>
+        )}
 
-        <a href={project.live} target="_blank" rel="noreferrer">
-          <FaExternalLinkAlt /> Live
-        </a>
+        {project.live ? (
+          <a href={project.live} target="_blank" rel="noreferrer">
+            <FaExternalLinkAlt /> Live
+          </a>
+        ) : (
+          <span className="disabled-link">No Demo</span>
+        )}
       </div>
     </div>
   );
