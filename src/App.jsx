@@ -6,7 +6,9 @@ import Profile from "./components/Profile";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import FeedbackWall from "./components/FeedbackWall";
 
 import "./index.css";
 import "./App.css";
@@ -20,7 +22,7 @@ const quotes = [
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [quote] = useState(quotes[Math.floor(Math.random() * quotes.length)]);
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
   const toggleTheme = () => {
     setDarkMode((prev) => !prev);
     document.body.classList.toggle("light");
@@ -51,6 +53,10 @@ function App() {
       <Skills />
 
       <Projects />
+
+      <FeedbackWall />
+
+      <Contact />
 
       <Footer
         socials={[
