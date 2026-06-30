@@ -9,14 +9,12 @@ import Contact from "../components/Contact";
 function Home() {
   return (
     <>
-      <Header />
+      <Header welcome="Hi, I'm" />
       <Profile />
       <About />
       <Skills />
       <Projects />
-
       <FeedbackWall />
-
       <Contact />
     </>
   );
