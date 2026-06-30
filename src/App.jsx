@@ -1,3 +1,4 @@
+import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Navbar from "./components/Navbar";
@@ -16,56 +17,44 @@ import "./App.css";
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
-  useEffect(() => {
-    document.body.className = "";
-    document.body.classList.add(theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  // =========================
-  // TOGGLE THEME (ONLY DARK / LIGHT)
-  // =========================
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
+  useEffect(() => {
+    document.body.className = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   return (
-    <div className={theme}>
+    <>
       <Navbar onToggleTheme={toggleTheme} darkMode={theme === "dark"} />
 
-      <Header welcome="Hi, I'm" />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Header welcome="Hi, I'm" />
+              <Profile />
+              <About />
+              <Skills />
+              <Projects />
 
-      <Profile
-        name="Mahdia Hassani"
-        role="Front-end Developer"
-        location="Kabul, Afghanistan"
-        socials={[
-          { label: "GitHub", href: "https://github.com/Mahdia-Hassani" },
-          {
-            label: "LinkedIn",
-            href: "https://www.linkedin.com/in/mahdia-hassani-91a626343/",
-          },
-          { label: "Twitter/X", href: "https://x.com/Mahdia010" },
-        ]}
-      />
+              <FeedbackWall />
 
-      <About />
-      <Skills />
-      <Projects />
-      <FeedbackWall />
-      <Contact />
+              <Contact />
+            </>
+          }
+        />
 
-      <Footer
-        socials={[
-          { label: "GitHub", href: "https://github.com/Mahdia-Hassani" },
-          {
-            label: "LinkedIn",
-            href: "https://www.linkedin.com/in/mahdia-hassani-91a626343/",
-          },
-          { label: "Twitter/X", href: "https://x.com/Mahdia010" },
-        ]}
-      />
-    </div>
+        <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+
+      <Footer />
+    </>
   );
 }
 

@@ -230,6 +230,22 @@ body.light .navbar-links a:hover {
   display: none;
 }
 
+.active-link {
+  color: var(--primary);
+  font-weight: bold;
+  position: relative;
+}
+
+.active-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--primary);
+}
+
 @media (max-width: 900px) {
   .navbar-logo span {
     display: none;
@@ -723,6 +739,7 @@ body.light .navbar-links a:hover {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
   margin-top: 2.5rem;
+  align-items: stretch;
 }
 
 /* CARD */
@@ -737,6 +754,9 @@ body.light .navbar-links a:hover {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeUp 0.6s ease forwards;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 @keyframes fadeUp {
@@ -758,6 +778,10 @@ body.light .navbar-links a:hover {
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 0.8rem;
+}
+
+.project-desc {
+  min-height: 72px;
 }
 
 /* FEATURED */
@@ -803,7 +827,8 @@ body.light .navbar-links a:hover {
 .project-links {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
 .project-links a {
@@ -813,6 +838,12 @@ body.light .navbar-links a:hover {
   display: flex;
   align-items: center;
   gap: 0.4rem;
+}
+
+project-link-wrapper {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .project-image-wrapper {

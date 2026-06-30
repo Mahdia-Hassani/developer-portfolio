@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { FaBars } from "react-icons/fa";
 
 const navLinks = [
-  { title: "Home", href: "#home" },
-  { title: "About", href: "#about" },
-  { title: "Skills", href: "#skills" },
-  { title: "Projects", href: "#projects" },
-  { title: "Contact", href: "#contact" },
+  { title: "Home", path: "/" },
+  { title: "About", path: "/about" },
+  { title: "Projects", path: "/projects" },
+  { title: "Contact", path: "/contact" },
 ];
 
 function Navbar({ onToggleTheme, darkMode }) {
@@ -17,15 +17,10 @@ function Navbar({ onToggleTheme, darkMode }) {
     <nav className="navbar">
       {/* LOGO */}
       <div className="navbar-logo">
-        <img
-          src="/images/logo-white.png"
-          alt="logo"
-          className="navbar-logo-img"
-        />
-        <span>Mahdia.dev</span>
+        <img src="/images/logo-white.png" alt="logo" />
       </div>
 
-      {/* MOBILE BUTTON */}
+      {/* MENU BUTTON */}
       <button className="menu-btn" onClick={() => setOpen(!open)}>
         <FaBars />
       </button>
@@ -34,9 +29,13 @@ function Navbar({ onToggleTheme, darkMode }) {
       <ul className={`navbar-links ${open ? "active" : ""}`}>
         {navLinks.map((item) => (
           <li key={item.title}>
-            <a href={item.href} onClick={() => setOpen(false)}>
+            <NavLink
+              to={item.path}
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+              onClick={() => setOpen(false)}
+            >
               {item.title}
-            </a>
+            </NavLink>
           </li>
         ))}
       </ul>
@@ -45,7 +44,7 @@ function Navbar({ onToggleTheme, darkMode }) {
       <div className="navbar-actions">
         <ThemeToggle onToggle={onToggleTheme} darkMode={darkMode} />
 
-        <a href="#CV" className="navbar-btn">
+        <a href="#contact" className="navbar-btn">
           CV
         </a>
       </div>

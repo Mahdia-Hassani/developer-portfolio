@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function FeedbackWall() {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -8,10 +8,25 @@ export default function FeedbackWall() {
     comment: "",
   });
 
+  // ✅ Load saved feedbacks
+  useEffect(() => {
+    const saved = localStorage.getItem("feedbacks");
+    if (saved) {
+      setFeedbacks(JSON.parse(saved));
+    }
+  }, []);
+
+  // ✅ Save to localStorage
+  useEffect(() => {
+    localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
+  }, [feedbacks]);
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
     setForm((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: name === "rating" ? Number(value) : value,
     }));
   };
 
@@ -38,7 +53,7 @@ export default function FeedbackWall() {
     <section className="feedback">
       <h2>Your Feedback</h2>
 
-      {/* SUBMIT BOX (کوچک و جدا) */}
+      {/* SUBMIT BOX */}
       <div className="feedback-box">
         <form onSubmit={handleSubmit} className="feedback-form">
           <input
@@ -67,7 +82,7 @@ export default function FeedbackWall() {
         </form>
       </div>
 
-      {/* WALL (اصلی) */}
+      {/* WALL */}
       <div className="feedback-wall">
         {feedbacks.length === 0 ? (
           <p className="empty">No feedback yet...</p>
