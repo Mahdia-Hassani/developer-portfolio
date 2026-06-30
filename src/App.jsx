@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import ProjectDetails from "./pages/ProjectDetails";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import Profile from "./components/Profile";
@@ -10,6 +11,7 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import FeedbackWall from "./components/FeedbackWall";
+import NotFound from "./pages/NotFound";
 
 import "./index.css";
 import "./App.css";
@@ -50,7 +52,9 @@ function App() {
 
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/:id" element={<ProjectDetails />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />

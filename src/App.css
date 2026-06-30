@@ -178,6 +178,21 @@ body.light .navbar-logo img {
   box-shadow: 0 10px 25px var(--primary-light);
 }
 
+.navbar-links a {
+  color: var(--text);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.navbar-links a.nav-active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.navbar-links a.nav-active::after {
+  width: 100%;
+}
+
 /* ========= THEME TOGGLE ========= */
 
 .theme-btn {
@@ -782,6 +797,10 @@ body.light .navbar-links a:hover {
 
 .project-desc {
   min-height: 72px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  min-height: 90px;
 }
 
 /* FEATURED */
@@ -840,7 +859,7 @@ body.light .navbar-links a:hover {
   gap: 0.4rem;
 }
 
-project-link-wrapper {
+.project-link-wrapper {
   text-decoration: none;
   color: inherit;
   display: block;
@@ -1240,4 +1259,26 @@ project-link-wrapper {
     flex-direction: column;
     text-align: center;
   }
+}
+
+.not-found {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.not-found-content h1 {
+  font-size: 6rem;
+  color: var(--primary);
+}
+
+.not-found-content h2 {
+  margin: 1rem 0;
+}
+
+.not-found-content p {
+  color: var(--muted);
+  margin-bottom: 2rem;
 }
