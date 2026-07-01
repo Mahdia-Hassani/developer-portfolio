@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { FaBars } from "react-icons/fa";
+import { AppContext } from "../../context/AppContext";
 
 const navLinks = [
   { title: "Home", path: "/" },
   { title: "About", path: "/about" },
   { title: "Projects", path: "/projects" },
+  { title: "Favorites", path: "/favorites" },
   { title: "Contact", path: "/contact" },
 ];
 
-function Navbar({ onToggleTheme, darkMode }) {
+function Navbar() {
   const [open, setOpen] = useState(false);
+
+  const { theme, toggleTheme } = useContext(AppContext);
 
   return (
     <nav className="navbar">
@@ -42,7 +46,7 @@ function Navbar({ onToggleTheme, darkMode }) {
 
       {/* ACTIONS */}
       <div className="navbar-actions">
-        <ThemeToggle onToggle={onToggleTheme} darkMode={darkMode} />
+        <ThemeToggle onToggle={toggleTheme} darkMode={theme === "dark"} />
 
         <a href="#contact" className="navbar-btn">
           CV

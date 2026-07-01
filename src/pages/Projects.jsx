@@ -1,5 +1,7 @@
+import ProjectsSection from "../components/sections/Projects";
+
 function Projects() {
-  return <h1>Projects Page</h1>;
+  return <ProjectsSection />;
 }
 
 export default Projects;

@@ -1,38 +1,32 @@
 import TechBadge from "../ui/TechBadge";
 import { Link } from "react-router-dom";
-import {
-  FaGithub,
-  FaExternalLinkAlt,
-  FaReact,
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
-  FaPython,
-  FaWindowMaximize,
-} from "react-icons/fa";
-import { SiMysql } from "react-icons/si";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext";
+import { FaStar, FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 function ProjectCard({ project }) {
-  if (!project) return null;
+  const { favorites, toggleFavorite } = useContext(AppContext);
 
-  const techIcons = {
-    HTML: <FaHtml5 color="#e34c26" />,
-    CSS: <FaCss3Alt color="#2965f1" />,
-    JavaScript: <FaJs color="#f7df1e" />,
-    React: <FaReact color="#61DBFB" />,
-    Python: <FaPython color="#3776AB" />,
-    MySQL: <SiMysql color="#4479A1" />,
-    Tkinter: <FaWindowMaximize color="#6c757d" />,
-  };
+  const isFav = favorites.includes(project.id);
 
   return (
     <div className="project-card">
       <div className="project-image-wrapper">
         <img src={project.image} alt={project.name} className="project-img" />
 
-        {project.featured && (
-          <span className="featured-badge">Featured ⭐</span>
-        )}
+        <div className="project-badges">
+          {project.featured && (
+            <span className="badge featured">Featured ⭐</span>
+          )}
+
+          <button
+            onClick={() => toggleFavorite(project.id)}
+            className={`badge fav ${isFav ? "active" : ""}`}
+            aria-label="favorite"
+          >
+            <FaStar />
+          </button>
+        </div>
       </div>
 
       <h3>{project.name}</h3>
