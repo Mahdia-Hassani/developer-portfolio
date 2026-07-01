@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import projects from "../data/Projects";
+import projects from "../data/projects";
 import ProjectCard from "../components/ui/ProjectCard";
 
 function Favorites() {
