@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ProjectCard from "../ui/ProjectCard";
-import projects from "../../data/Projects";
+import projects from "../../data/projects";
 
 function Projects() {
   const [filter, setFilter] = useState("All");
