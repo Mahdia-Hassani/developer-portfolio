@@ -1,11 +1,10 @@
 import { useState } from "react";
-import projects from "../data/projects";
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "../ui/ProjectCard";
+import projects from "../../data/Projects";
 
 function Projects() {
   const [filter, setFilter] = useState("All");
 
-  // فیلتر کردن پروژه‌ها
   const filteredProjects =
     filter === "All"
       ? projects

@@ -1,10 +1,11 @@
-import Header from "../components/Header";
-import Profile from "../components/Profile";
-import About from "../components/About";
-import Skills from "../components/Skills";
-import Projects from "../components/Projects";
-import FeedbackWall from "../components/FeedbackWall";
-import Contact from "../components/Contact";
+import Header from "../components/layout/Header";
+
+import Profile from "../components/sections/Profile";
+import About from "../components/sections/About";
+import Skills from "../components/sections/Skills";
+import Projects from "../components/sections/Projects";
+import FeedbackWall from "../components/sections/FeedbackWall";
+import Contact from "../components/sections/Contact";
 
 function Home() {
   return (

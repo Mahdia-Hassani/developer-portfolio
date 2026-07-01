@@ -1,3 +1,4 @@
+import TechBadge from "../ui/TechBadge";
 import { Link } from "react-router-dom";
 import {
   FaGithub,
@@ -40,9 +41,7 @@ function ProjectCard({ project }) {
 
       <div className="tech-stack">
         {project.tech?.map((tech) => (
-          <span key={tech} className="tech-badge">
-            {techIcons[tech] || tech}
-          </span>
+          <TechBadge key={tech} tech={tech} />
         ))}
       </div>
 
