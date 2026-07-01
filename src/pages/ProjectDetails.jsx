@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import projects from "../data/projects";
+import projects from "../../data/projects";
 
 function ProjectDetails() {
   const { id } = useParams();
