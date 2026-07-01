@@ -17,11 +17,11 @@ section {
 }
 
 .section-title {
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 800;
-  color: var(--text);
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
   margin-bottom: 2.5rem;
-  line-height: 1.2;
+  letter-spacing: 1px;
 }
 
 .badge {
@@ -99,13 +99,12 @@ section {
   transition: 0.3s ease;
 }
 
-body.light .navbar {
-  background: rgba(255, 255, 255, 0.85);
+ody.light .navbar {
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  position: sticky;
-  z-index: 9999;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .navbar-logo {
@@ -609,88 +608,108 @@ body.light .navbar-links a:hover {
   }
 }
 
-/* ======== About ======== */
+/* ========== ABOUT SECTION ========== */
 
 .about {
-  padding: 5rem 2.5rem;
-  border-top: 1px solid var(--border);
+  padding: 6rem 1.5rem;
 }
+
 .about-inner {
   max-width: 1100px;
   margin: 0 auto;
 }
 
 .about-grid {
-  display: flex;
-  gap: 4rem;
-}
-.about-left {
-  flex: 1;
-}
-.about-right {
-  flex: 1;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2.5rem;
 }
 
+/* LEFT */
 .about-bio {
-  color: var(--muted);
-  line-height: 1.85;
-  margin-bottom: 1.1rem;
-  font-size: 0.95rem;
-}
-
-.about-more {
+  line-height: 1.8;
+  opacity: 0.9;
   margin-bottom: 1rem;
 }
 
 .about-toggle {
-  background: none;
-  border: 1px solid var(--primary-border);
-  color: var(--green);
-  padding: 0.38rem 1rem;
-  font-size: 0.8rem;
-  border-radius: 4px;
+  margin-top: 1rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
   cursor: pointer;
-  font-family: var(--mono);
-  transition: background 0.2s;
-  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
 }
+
+/* hover state */
 .about-toggle:hover {
-  background: var(--primary-light);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
-.about-sub {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--faint);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin: 1.5rem 0 0.65rem;
+/* active click feel */
+.about-toggle:active {
+  transform: translateY(0px);
 }
 
-.hobbies {
-  list-style: none;
+/* LIGHT MODE support (اگر داری theme toggle) */
+body.light .about-toggle {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light .about-toggle:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* RIGHT CARDS */
+.about-card {
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-.hobbies li {
-  color: var(--muted);
-  font-size: 0.88rem;
-}
-
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 1rem;
+  padding: 1.2rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: 0.2s ease;
 }
 
+.about-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.about-card svg {
+  font-size: 1.4rem;
+  margin-top: 3px;
+  opacity: 0.8;
+}
+
+.about-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.about-card p {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* highlight style */
+.about-card.highlight {
+  border-left: 3px solid #6c63ff;
+}
+
+/* responsive */
 @media (max-width: 768px) {
-  .about {
-    padding: 3rem 1.2rem;
-  }
   .about-grid {
-    flex-direction: column;
-    gap: 2rem;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -823,6 +842,36 @@ body.light .navbar-links a:hover {
 
 .nav-btn:hover {
   transform: translateY(-2px);
+}
+/* favorite project */
+.favorites-page h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.favorites-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+@media (max-width: 992px) {
+  .favorites-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .favorites-grid {
+    grid-template-columns: 1fr;
+  }
 }
 /* Project section */
 
@@ -1495,4 +1544,76 @@ body.light .navbar-links a:hover {
   border-color: var(--primary);
   color: var(--primary);
   transform: translateY(-2px);
+}
+
+/* Featured */
+.project-image-wrapper {
+  position: relative;
+}
+
+/* container برای کنترل بهتر */
+.project-badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* base badge style */
+.badge {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+/* featured */
+.badge.featured {
+  background: var(--primary);
+  color: #111;
+  font-weight: 600;
+}
+
+/* favorite button */
+.badge.fav {
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* hover */
+.badge.fav:hover {
+  transform: scale(1.1);
+}
+
+/* active favorite */
+.badge.fav.active {
+  color: gold;
+  background: var(--primary);
+}
+
+.badge.fav svg {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.badge.fav:hover svg {
+  transform: scale(1.1);
+}
+
+.badge.fav.active svg {
+  color: #ffd88a;
 }
